@@ -1,0 +1,30 @@
+# Local .terraform directories — downloaded provider plugins and modules,
+# re-fetched by `terraform init`, never something to commit.
+**/.terraform/*
+
+# State files — hold the real current values of every managed resource,
+# which can include sensitive data depending on the resource. Given you
+# decided on local state for now, this is what actually keeps it out of git.
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Override files — local, personal overrides to the checked-in config,
+# not meant to be shared or committed.
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration, if you ever end up with one locally
+.terraformrc
+terraform.rc
+
+# Any *.tfvars file — commonly used to hold real values (including the
+# GitHub token, if you ever pass it that way instead of an env var) rather
+# than committed defaults.
+*.tfvars
+*.tfvars.json
