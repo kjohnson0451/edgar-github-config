@@ -28,3 +28,6 @@ terraform.rc
 # than committed defaults.
 *.tfvars
 *.tfvars.json
+
+# Saved plan files from `terraform plan -out`, which can contain sensitive values.
+tfplan
