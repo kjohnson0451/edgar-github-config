@@ -103,13 +103,16 @@ resource "github_repository_ruleset" "edgar_fetcher_main" {
       do_not_enforce_on_create             = false
 
       required_check {
-        context = "check-schema-drift"
+        context        = "check-schema-drift"
+        integration_id = 15368
       }
       required_check {
-        context = "build-test"
+        context        = "build-test"
+        integration_id = 15368
       }
       required_check {
-        context = "validate-title"
+        context        = "validate-title"
+        integration_id = 15368
       }
     }
   }
