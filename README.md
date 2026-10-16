@@ -7,10 +7,10 @@ Terraform config for GitHub repository governance across the Edgar Pipeline repo
 A "Protect main" branch ruleset on each repo:
 
 | Repo             | Ruleset ID | Rules                                                                                                                        |
-| ---------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| ---------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------- | --- |
 | `edgar-fetcher`  | 24042796   | no deletion, no force-push, PR required (squash only), required checks: `check-schema-drift`, `build-test`, `validate-title` |
-| `edgar-schemas`  | 24042851   | no deletion, no force-push, PR required (squash only)                                                                        |
-| `edgar-pipeline` | 24042888   | no deletion, no force-push, PR required (squash only)                                                                        |
+| `edgar-schemas`  | 24042851   | no deletion, no force-push, PR required (squash only), required checks: `validate-schema`, `validate-title`                  |     |
+| `edgar-pipeline` | 24042888   | no deletion, no force-push, PR required (squash only), required checks: `validate-manifests`, `validate-title`               |     |
 
 Not managed here: general repo settings (merge-method checkboxes, squash commit title default). Those are still manual.
 

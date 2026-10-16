@@ -41,6 +41,20 @@ resource "github_repository_ruleset" "edgar_pipeline_main" {
       required_review_thread_resolution = local.common_pull_request.required_review_thread_resolution
       allowed_merge_methods             = local.common_pull_request.allowed_merge_methods
     }
+
+    required_status_checks {
+      strict_required_status_checks_policy = true
+      do_not_enforce_on_create             = false
+
+      required_check {
+        context        = "validate-manifests"
+        integration_id = 15368
+      }
+      required_check {
+        context        = "validate-title"
+        integration_id = 15368
+      }
+    }
   }
 }
 
@@ -68,6 +82,20 @@ resource "github_repository_ruleset" "edgar_schemas_main" {
       require_last_push_approval        = local.common_pull_request.require_last_push_approval
       required_review_thread_resolution = local.common_pull_request.required_review_thread_resolution
       allowed_merge_methods             = local.common_pull_request.allowed_merge_methods
+    }
+
+    required_status_checks {
+      strict_required_status_checks_policy = true
+      do_not_enforce_on_create             = false
+
+      required_check {
+        context        = "validate-schema"
+        integration_id = 15368
+      }
+      required_check {
+        context        = "validate-title"
+        integration_id = 15368
+      }
     }
   }
 }
