@@ -51,7 +51,7 @@ resource "github_repository_ruleset" "edgar_pipeline_main" {
         integration_id = 15368
       }
       required_check {
-        context        = "validate-title"
+        context        = "Validate PR title"
         integration_id = 15368
       }
     }
@@ -93,7 +93,7 @@ resource "github_repository_ruleset" "edgar_schemas_main" {
         integration_id = 15368
       }
       required_check {
-        context        = "validate-title"
+        context        = "Validate PR title"
         integration_id = 15368
       }
     }
@@ -139,7 +139,7 @@ resource "github_repository_ruleset" "edgar_fetcher_main" {
         integration_id = 15368
       }
       required_check {
-        context        = "validate-title"
+        context        = "Validate PR title"
         integration_id = 15368
       }
     }
