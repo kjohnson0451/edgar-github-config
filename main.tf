@@ -119,6 +119,20 @@ resource "github_repository_ruleset" "edgar_schemas_tags" {
   }
 }
 
+resource "github_repository" "edgar_fetcher" {
+  name = "edgar-fetcher"
+
+  allow_squash_merge          = true
+  allow_merge_commit          = false
+  allow_rebase_merge          = false
+  squash_merge_commit_title   = "PR_TITLE"
+  squash_merge_commit_message = "BLANK"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "github_repository_ruleset" "edgar_fetcher_main" {
   name        = "Protect main"
   repository  = "edgar-fetcher"
