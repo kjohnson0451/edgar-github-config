@@ -100,6 +100,25 @@ resource "github_repository_ruleset" "edgar_schemas_main" {
   }
 }
 
+resource "github_repository_ruleset" "edgar_schemas_tags" {
+  name        = "Protect version tags"
+  repository  = "edgar-schemas"
+  target      = "tag"
+  enforcement = "active"
+
+  conditions {
+    ref_name {
+      include = ["refs/tags/v*"]
+      exclude = []
+    }
+  }
+
+  rules {
+    deletion = true
+    update   = true
+  }
+}
+
 resource "github_repository_ruleset" "edgar_fetcher_main" {
   name        = "Protect main"
   repository  = "edgar-fetcher"
