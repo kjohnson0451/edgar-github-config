@@ -13,12 +13,14 @@ A "Protect main" branch ruleset on each repo:
 | `edgar-pipeline`      | 24042888   | no deletion, no force-push, PR required (squash only), required checks: `validate-manifests`, `Validate PR title`                  |
 | `edgar-github-config` | 25307560   | no deletion, no force-push, PR required (squash only)                                                                              |
 
+`edgar-schemas` also has a tag ruleset, "Protect version tags" (ID 25317209). It blocks deleting or moving any `v*` tag. Creating tags is still allowed, and there are no bypass actors. Consumers pin schema versions by tag, so a bad tag is fixed by cutting a new version.
+
 Not managed here: general repo settings (merge-method checkboxes, squash commit title default). Those are still manual.
 
 ## Files
 
 - `providers.tf`: Terraform and provider version requirements, GitHub provider config
-- `main.tf`: the four rulesets and the shared `locals`
+- `main.tf`: the five rulesets and the shared `locals`
 - `.terraform.lock.hcl`: provider version lock, committed on purpose
 
 ## Prerequisites
@@ -49,6 +51,7 @@ terraform import github_repository_ruleset.edgar_fetcher_main edgar-fetcher:2404
 terraform import github_repository_ruleset.edgar_schemas_main edgar-schemas:24042851
 terraform import github_repository_ruleset.edgar_pipeline_main edgar-pipeline:24042888
 terraform import github_repository_ruleset.edgar_github_config_main edgar-github-config:25307560
+terraform import github_repository_ruleset.edgar_schemas_tags edgar-schemas:25317209
 ```
 
 Then run `terraform plan` and confirm it's empty before applying anything.
