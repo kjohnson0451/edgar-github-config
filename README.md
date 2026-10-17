@@ -6,18 +6,19 @@ Terraform config for GitHub repository governance across the Edgar Pipeline repo
 
 A "Protect main" branch ruleset on each repo:
 
-| Repo             | Ruleset ID | Rules                                                                                                                              |
-| ---------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `edgar-fetcher`  | 24042796   | no deletion, no force-push, PR required (squash only), required checks: `check-schema-drift`, `build-test`, `Validate PR title`   |
-| `edgar-schemas`  | 24042851   | no deletion, no force-push, PR required (squash only), required checks: `validate-schema`, `Validate PR title`                     |
-| `edgar-pipeline` | 24042888   | no deletion, no force-push, PR required (squash only), required checks: `validate-manifests`, `Validate PR title`                 |
+| Repo                  | Ruleset ID | Rules                                                                                                                              |
+| --------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `edgar-fetcher`       | 24042796   | no deletion, no force-push, PR required (squash only), required checks: `check-schema-drift`, `build-test`, `Validate PR title`   |
+| `edgar-schemas`       | 24042851   | no deletion, no force-push, PR required (squash only), required checks: `validate-schema`, `Validate PR title`                     |
+| `edgar-pipeline`      | 24042888   | no deletion, no force-push, PR required (squash only), required checks: `validate-manifests`, `Validate PR title`                  |
+| `edgar-github-config` | 25307560   | no deletion, no force-push, PR required (squash only)                                                                              |
 
 Not managed here: general repo settings (merge-method checkboxes, squash commit title default). Those are still manual.
 
 ## Files
 
 - `providers.tf`: Terraform and provider version requirements, GitHub provider config
-- `main.tf`: the three rulesets and the shared `locals`
+- `main.tf`: the four rulesets and the shared `locals`
 - `.terraform.lock.hcl`: provider version lock, committed on purpose
 
 ## Prerequisites
@@ -47,6 +48,7 @@ State is local (`terraform.tfstate`) and gitignored. Back it up manually. If it'
 terraform import github_repository_ruleset.edgar_fetcher_main edgar-fetcher:24042796
 terraform import github_repository_ruleset.edgar_schemas_main edgar-schemas:24042851
 terraform import github_repository_ruleset.edgar_pipeline_main edgar-pipeline:24042888
+terraform import github_repository_ruleset.edgar_github_config_main edgar-github-config:25307560
 ```
 
 Then run `terraform plan` and confirm it's empty before applying anything.
