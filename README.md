@@ -53,7 +53,7 @@ Then run `terraform plan` and confirm it's empty before applying anything.
 
 ## Adding or changing required checks
 
-- A check's `context` is the workflow **job id** (the key under `jobs:`), not its `name:` field.
+- A check's `context` is the check run name: the job's `name:` if it has one, otherwise the job id. Confirm it with `gh pr checks <pr>` before requiring it.
 - GitHub can only offer a check it has seen report at least once.
 - Set `integration_id = 15368` (the GitHub Actions app) on every `required_check`. Without it, Terraform sets the ID to 0 and any app can satisfy the check.
 - A ruleset allows only one `required_status_checks` block. Edit it, don't add a second.
