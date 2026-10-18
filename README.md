@@ -40,22 +40,29 @@ terraform plan -out=tfplan
 terraform apply tfplan
 ```
 
-Review the plan before applying. `terraform plan` should report no changes unless you edited the config. An unexpected diff means the live ruleset was changed outside Terraform, so find out why before applying.
+Review the plan before applying. `terraform plan` should report no changes unless you edited the config. An unexpected diff means a live ruleset or repo setting was changed outside Terraform, so find out why before applying.
 
 ## State
 
 State is local (`terraform.tfstate`) and gitignored. Back it up manually. If it's lost, re-import each resource, using the ruleset IDs above for the rulesets:
 
 ```bash
-terraform import github_repository_ruleset.edgar_fetcher_main edgar-fetcher:24042796
+# edgar-fetcher
 terraform import github_repository.edgar_fetcher edgar-fetcher
+terraform import github_repository_ruleset.edgar_fetcher_main edgar-fetcher:24042796
+
+# edgar-schemas
+terraform import github_repository.edgar_schemas edgar-schemas
 terraform import github_repository_ruleset.edgar_schemas_main edgar-schemas:24042851
 terraform import github_repository_ruleset.edgar_schemas_tags edgar-schemas:25317209
-terraform import github_repository_ruleset.edgar_pipeline_main edgar-pipeline:24042888
-terraform import github_repository_ruleset.edgar_github_config_main edgar-github-config:25307560
-terraform import github_repository.edgar_schemas edgar-schemas
+
+# edgar-pipeline
 terraform import github_repository.edgar_pipeline edgar-pipeline
+terraform import github_repository_ruleset.edgar_pipeline_main edgar-pipeline:24042888
+
+# edgar-github-config
 terraform import github_repository.edgar_github_config edgar-github-config
+terraform import github_repository_ruleset.edgar_github_config_main edgar-github-config:25307560
 ```
 
 Then run `terraform plan` and confirm it's empty before applying anything.
@@ -70,4 +77,4 @@ Then run `terraform plan` and confirm it's empty before applying anything.
 ## Known limitations
 
 - `require_extra_approval_for_unattributed_changes` can't be managed by the provider (integrations/terraform-provider-github#3664). GitHub defaults it to `true` when a payload omits it. If you turn it off in the UI, the next Terraform update to that ruleset turns it back on.
-- Don't edit these rulesets in the GitHub UI. Terraform will revert them on the next apply.
+- Don't edit these rulesets or repo settings in the GitHub UI. Terraform will revert them on the next apply.
