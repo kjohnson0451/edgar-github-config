@@ -24,6 +24,7 @@ resource "github_repository" "edgar_pipeline" {
   allow_rebase_merge          = false
   squash_merge_commit_title   = "PR_TITLE"
   squash_merge_commit_message = "BLANK"
+  delete_branch_on_merge = true
 
   lifecycle {
     prevent_destroy = true
@@ -141,6 +142,7 @@ resource "github_repository" "edgar_fetcher" {
   allow_rebase_merge          = false
   squash_merge_commit_title   = "PR_TITLE"
   squash_merge_commit_message = "BLANK"
+  delete_branch_on_merge = true
 
   lifecycle {
     prevent_destroy = true
@@ -201,6 +203,7 @@ resource "github_repository" "edgar_schemas" {
   allow_rebase_merge          = false
   squash_merge_commit_title   = "PR_TITLE"
   squash_merge_commit_message = "BLANK"
+  delete_branch_on_merge = true
 
   lifecycle {
     prevent_destroy = true
@@ -215,6 +218,7 @@ resource "github_repository" "edgar_github_config" {
   allow_rebase_merge          = false
   squash_merge_commit_title   = "PR_TITLE"
   squash_merge_commit_message = "BLANK"
+  delete_branch_on_merge = true
 
   lifecycle {
     prevent_destroy = true
