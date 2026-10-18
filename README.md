@@ -1,6 +1,6 @@
 # edgar-github-config
 
-Terraform config for GitHub repository governance across the Edgar Pipeline repos. It manages rulesets and some repo settings, no cloud infrastructure.
+Terraform config for GitHub repository governance across the Edgar Pipeline repos. It manages rulesets and repo settings, no cloud infrastructure.
 
 ## What it manages
 
@@ -15,7 +15,7 @@ A "Protect main" branch ruleset on each repo:
 
 `edgar-schemas` also has a tag ruleset, "Protect version tags" (ID 25317209). It blocks deleting or moving any `v*` tag. Creating tags is still allowed, and there are no bypass actors. Consumers pin schema versions by tag, so a bad tag is fixed by cutting a new version.
 
-Not managed here: general repo settings (merge-method checkboxes, squash commit title default). Those are still manual.
+Repo settings (merge methods, squash commit title) are managed for every repo above.
 
 ## Files
 
@@ -44,7 +44,7 @@ Review the plan before applying. `terraform plan` should report no changes unles
 
 ## State
 
-State is local (`terraform.tfstate`) and gitignored. Back it up manually. If it's lost, re-import each ruleset using the IDs above:
+State is local (`terraform.tfstate`) and gitignored. Back it up manually. If it's lost, re-import each resource, using the ruleset IDs above for the rulesets:
 
 ```bash
 terraform import github_repository_ruleset.edgar_fetcher_main edgar-fetcher:24042796
@@ -53,6 +53,9 @@ terraform import github_repository_ruleset.edgar_schemas_main edgar-schemas:2404
 terraform import github_repository_ruleset.edgar_schemas_tags edgar-schemas:25317209
 terraform import github_repository_ruleset.edgar_pipeline_main edgar-pipeline:24042888
 terraform import github_repository_ruleset.edgar_github_config_main edgar-github-config:25307560
+terraform import github_repository.edgar_schemas edgar-schemas
+terraform import github_repository.edgar_pipeline edgar-pipeline
+terraform import github_repository.edgar_github_config edgar-github-config
 ```
 
 Then run `terraform plan` and confirm it's empty before applying anything.
