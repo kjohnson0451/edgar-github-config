@@ -1,6 +1,6 @@
 # edgar-github-config
 
-Terraform config for GitHub repository governance across the Edgar Pipeline repos. It manages rulesets only, no cloud infrastructure.
+Terraform config for GitHub repository governance across the Edgar Pipeline repos. It manages rulesets and some repo settings, no cloud infrastructure.
 
 ## What it manages
 
@@ -20,7 +20,7 @@ Not managed here: general repo settings (merge-method checkboxes, squash commit 
 ## Files
 
 - `providers.tf`: Terraform and provider version requirements, GitHub provider config
-- `main.tf`: the five rulesets and the shared `locals`
+- `main.tf`: the five rulesets, the repo settings, and the shared `locals`
 - `.terraform.lock.hcl`: provider version lock, committed on purpose
 
 ## Prerequisites
@@ -48,6 +48,7 @@ State is local (`terraform.tfstate`) and gitignored. Back it up manually. If it'
 
 ```bash
 terraform import github_repository_ruleset.edgar_fetcher_main edgar-fetcher:24042796
+terraform import github_repository.edgar_fetcher edgar-fetcher
 terraform import github_repository_ruleset.edgar_schemas_main edgar-schemas:24042851
 terraform import github_repository_ruleset.edgar_pipeline_main edgar-pipeline:24042888
 terraform import github_repository_ruleset.edgar_github_config_main edgar-github-config:25307560
