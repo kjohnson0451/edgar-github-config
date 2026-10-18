@@ -16,24 +16,26 @@ locals {
   }
 }
 
-resource "github_repository" "edgar_pipeline" {
-  name = "edgar-pipeline"
+# edgar-fetcher
+
+resource "github_repository" "edgar_fetcher" {
+  name = "edgar-fetcher"
 
   allow_squash_merge          = true
   allow_merge_commit          = false
   allow_rebase_merge          = false
   squash_merge_commit_title   = "PR_TITLE"
   squash_merge_commit_message = "BLANK"
-  delete_branch_on_merge = true
+  delete_branch_on_merge      = true
 
   lifecycle {
     prevent_destroy = true
   }
 }
 
-resource "github_repository_ruleset" "edgar_pipeline_main" {
+resource "github_repository_ruleset" "edgar_fetcher_main" {
   name        = "Protect main"
-  repository  = "edgar-pipeline"
+  repository  = "edgar-fetcher"
   target      = "branch"
   enforcement = "active"
 
@@ -62,7 +64,11 @@ resource "github_repository_ruleset" "edgar_pipeline_main" {
       do_not_enforce_on_create             = false
 
       required_check {
-        context        = "validate-manifests"
+        context        = "check-schema-drift"
+        integration_id = 15368
+      }
+      required_check {
+        context        = "build-test"
         integration_id = 15368
       }
       required_check {
@@ -70,6 +76,23 @@ resource "github_repository_ruleset" "edgar_pipeline_main" {
         integration_id = 15368
       }
     }
+  }
+}
+
+# edgar-schemas
+
+resource "github_repository" "edgar_schemas" {
+  name = "edgar-schemas"
+
+  allow_squash_merge          = true
+  allow_merge_commit          = false
+  allow_rebase_merge          = false
+  squash_merge_commit_title   = "PR_TITLE"
+  squash_merge_commit_message = "BLANK"
+  delete_branch_on_merge      = true
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
 
@@ -134,24 +157,26 @@ resource "github_repository_ruleset" "edgar_schemas_tags" {
   }
 }
 
-resource "github_repository" "edgar_fetcher" {
-  name = "edgar-fetcher"
+# edgar-pipeline
+
+resource "github_repository" "edgar_pipeline" {
+  name = "edgar-pipeline"
 
   allow_squash_merge          = true
   allow_merge_commit          = false
   allow_rebase_merge          = false
   squash_merge_commit_title   = "PR_TITLE"
   squash_merge_commit_message = "BLANK"
-  delete_branch_on_merge = true
+  delete_branch_on_merge      = true
 
   lifecycle {
     prevent_destroy = true
   }
 }
 
-resource "github_repository_ruleset" "edgar_fetcher_main" {
+resource "github_repository_ruleset" "edgar_pipeline_main" {
   name        = "Protect main"
-  repository  = "edgar-fetcher"
+  repository  = "edgar-pipeline"
   target      = "branch"
   enforcement = "active"
 
@@ -180,11 +205,7 @@ resource "github_repository_ruleset" "edgar_fetcher_main" {
       do_not_enforce_on_create             = false
 
       required_check {
-        context        = "check-schema-drift"
-        integration_id = 15368
-      }
-      required_check {
-        context        = "build-test"
+        context        = "validate-manifests"
         integration_id = 15368
       }
       required_check {
@@ -195,20 +216,7 @@ resource "github_repository_ruleset" "edgar_fetcher_main" {
   }
 }
 
-resource "github_repository" "edgar_schemas" {
-  name = "edgar-schemas"
-
-  allow_squash_merge          = true
-  allow_merge_commit          = false
-  allow_rebase_merge          = false
-  squash_merge_commit_title   = "PR_TITLE"
-  squash_merge_commit_message = "BLANK"
-  delete_branch_on_merge = true
-
-  lifecycle {
-    prevent_destroy = true
-  }
-}
+# edgar-github-config
 
 resource "github_repository" "edgar_github_config" {
   name = "edgar-github-config"
@@ -218,7 +226,7 @@ resource "github_repository" "edgar_github_config" {
   allow_rebase_merge          = false
   squash_merge_commit_title   = "PR_TITLE"
   squash_merge_commit_message = "BLANK"
-  delete_branch_on_merge = true
+  delete_branch_on_merge      = true
 
   lifecycle {
     prevent_destroy = true

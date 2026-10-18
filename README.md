@@ -15,7 +15,7 @@ A "Protect main" branch ruleset on each repo:
 
 `edgar-schemas` also has a tag ruleset, "Protect version tags" (ID 25317209). It blocks deleting or moving any `v*` tag. Creating tags is still allowed, and there are no bypass actors. Consumers pin schema versions by tag, so a bad tag is fixed by cutting a new version.
 
-Repo settings (merge methods, squash commit title) are managed for every repo above.
+Repo settings (merge methods, squash commit title, delete branch on merge) are managed for every repo above.
 
 ## Files
 
