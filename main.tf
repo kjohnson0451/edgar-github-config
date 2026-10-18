@@ -16,6 +16,20 @@ locals {
   }
 }
 
+resource "github_repository" "edgar_pipeline" {
+  name = "edgar-pipeline"
+
+  allow_squash_merge          = true
+  allow_merge_commit          = false
+  allow_rebase_merge          = false
+  squash_merge_commit_title   = "PR_TITLE"
+  squash_merge_commit_message = "BLANK"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
 resource "github_repository_ruleset" "edgar_pipeline_main" {
   name        = "Protect main"
   repository  = "edgar-pipeline"
@@ -176,6 +190,34 @@ resource "github_repository_ruleset" "edgar_fetcher_main" {
         integration_id = 15368
       }
     }
+  }
+}
+
+resource "github_repository" "edgar_schemas" {
+  name = "edgar-schemas"
+
+  allow_squash_merge          = true
+  allow_merge_commit          = false
+  allow_rebase_merge          = false
+  squash_merge_commit_title   = "PR_TITLE"
+  squash_merge_commit_message = "BLANK"
+
+  lifecycle {
+    prevent_destroy = true
+  }
+}
+
+resource "github_repository" "edgar_github_config" {
+  name = "edgar-github-config"
+
+  allow_squash_merge          = true
+  allow_merge_commit          = false
+  allow_rebase_merge          = false
+  squash_merge_commit_title   = "PR_TITLE"
+  squash_merge_commit_message = "BLANK"
+
+  lifecycle {
+    prevent_destroy = true
   }
 }
 
