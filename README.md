@@ -9,6 +9,7 @@ A "Protect main" branch ruleset on each repo:
 | Repo                  | Ruleset ID | Rules                                                                                                                              |
 | --------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `edgar-fetcher`       | 24042796   | no deletion, no force-push, PR required (squash only), required checks: `check-schema-drift`, `build-test`, `Validate PR title`   |
+| `edgar-parser`       | 25995237   | no deletion, no force-push, PR required (squash only),                                                                     |
 | `edgar-schemas`       | 24042851   | no deletion, no force-push, PR required (squash only), required checks: `validate-schema`, `Validate PR title`                     |
 | `edgar-pipeline`      | 24042888   | no deletion, no force-push, PR required (squash only), required checks: `validate-manifests`, `Validate PR title`                  |
 | `edgar-github-config` | 25307560   | no deletion, no force-push, PR required (squash only)                                                                              |
@@ -20,7 +21,7 @@ Repo settings (merge methods, squash commit title, delete branch on merge, issue
 ## Files
 
 - `providers.tf`: Terraform and provider version requirements, GitHub provider config
-- `main.tf`: the five rulesets, the repo settings, and the shared `locals`
+- `main.tf`: the six rulesets, the repo settings, and the shared `locals`
 - `.terraform.lock.hcl`: provider version lock, committed on purpose
 
 ## Prerequisites
@@ -50,6 +51,10 @@ State is local (`terraform.tfstate`) and gitignored. Back it up manually. If it'
 # edgar-fetcher
 terraform import github_repository.edgar_fetcher edgar-fetcher
 terraform import github_repository_ruleset.edgar_fetcher_main edgar-fetcher:24042796
+
+# edgar-parser
+terraform import github_repository.edgar_parser edgar-parser
+terraform import github_repository_ruleset.edgar_parser_main edgar-parser:25995237
 
 # edgar-schemas
 terraform import github_repository.edgar_schemas edgar-schemas
