@@ -9,7 +9,7 @@ A "Protect main" branch ruleset on each repo:
 | Repo                  | Ruleset ID | Rules                                                                                                                              |
 | --------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `edgar-fetcher`       | 24042796   | no deletion, no force-push, PR required (squash only), required checks: `check-schema-drift`, `build-test`, `Validate PR title`   |
-| `edgar-parser`       | 25995237   | no deletion, no force-push, PR required (squash only),                                                                     |
+| `edgar-parser`       | 25995237   | no deletion, no force-push, PR required (squash only), required checks: `Validate PR title`                                       |
 | `edgar-schemas`       | 24042851   | no deletion, no force-push, PR required (squash only), required checks: `validate-schema`, `Validate PR title`                     |
 | `edgar-pipeline`      | 24042888   | no deletion, no force-push, PR required (squash only), required checks: `validate-manifests`, `Validate PR title`                  |
 | `edgar-github-config` | 25307560   | no deletion, no force-push, PR required (squash only)                                                                              |
