@@ -12,7 +12,7 @@ A "Protect main" branch ruleset on each repo:
 | `edgar-parser`       | 25995237   | no deletion, no force-push, PR required (squash only), required checks: `Validate PR title`                                       |
 | `edgar-schemas`       | 24042851   | no deletion, no force-push, PR required (squash only), required checks: `validate-schema`, `Validate PR title`                     |
 | `edgar-pipeline`      | 24042888   | no deletion, no force-push, PR required (squash only), required checks: `validate-manifests`, `Validate PR title`                  |
-| `edgar-github-config` | 25307560   | no deletion, no force-push, PR required (squash only)                                                                              |
+| `edgar-github-config` | 25307560   | no deletion, no force-push, PR required (squash only), required checks: `Validate PR title`                                        |
 
 `edgar-schemas` also has a tag ruleset, "Protect version tags" (ID 25317209). It blocks deleting or moving any `v*` tag. Creating tags is still allowed, and there are no bypass actors. Consumers pin schema versions by tag, so a bad tag is fixed by cutting a new version.
 
